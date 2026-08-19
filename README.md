@@ -75,3 +75,9 @@ com notificação por e-mail em caso de falha.
 - Adicionar CDC (Change Data Capture) para ingestão incremental em vez de overwrite completo
 - Explorar Liquid Clustering como alternativa ao particionamento tradicional
 - Adicionar testes automatizados no CI/CD via GitHub Actions
+
+## Efetuado um Dashboard Simples
+
+- Foi efetuado um Dashboard com nome: Faturamento Diário - Corridas 2026-08-18 13:22:10
+- Apenas Para completar o Projeto
+- Caso fosse solicitado por alguma área da empresa.
