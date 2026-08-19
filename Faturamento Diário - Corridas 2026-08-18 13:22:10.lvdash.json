@@ -1,0 +1,352 @@
+{
+  "datasets": [
+    {
+      "name": "faturamento_diario",
+      "displayName": "Faturamento Diário",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.gold_faturamento_diario",
+        "dimensions": [
+          {
+            "name": "Data",
+            "expr": "Data"
+          }
+        ],
+        "measures": [
+          {
+            "name": "total_corridas",
+            "expr": "SUM(total_corridas)"
+          },
+          {
+            "name": "faturamento_total",
+            "expr": "SUM(faturamento_total)"
+          },
+          {
+            "name": "distancia_total",
+            "expr": "SUM(Distancia_total)"
+          },
+          {
+            "name": "distancia_media",
+            "expr": "AVG(distancia_media)"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "3a37771c",
+      "displayName": "Dashboard_Taxis",
+      "layout": [
+        {
+          "widget": {
+            "name": "faturamento_total_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "faturamento_diario",
+                  "fields": [
+                    {
+                      "name": "measure(faturamento_total)",
+                      "expression": "MEASURE(`faturamento_total`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Faturamento Total",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(faturamento_total)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 4,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "corridas_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "faturamento_diario",
+                  "fields": [
+                    {
+                      "name": "measure(total_corridas)",
+                      "expression": "MEASURE(`total_corridas`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total de Corridas",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(total_corridas)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 0,
+            "width": 4,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "distancia_counter",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "faturamento_diario",
+                  "fields": [
+                    {
+                      "name": "measure(distancia_total)",
+                      "expression": "MEASURE(`distancia_total`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Distância Total (km)",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(distancia_total)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 0,
+            "width": 4,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "faturamento_linha",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "faturamento_diario",
+                  "fields": [
+                    {
+                      "name": "daily(Data)",
+                      "expression": "DATE_TRUNC(\"DAY\", `Data`)"
+                    },
+                    {
+                      "name": "measure(faturamento_total)",
+                      "expression": "MEASURE(`faturamento_total`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Evolução do Faturamento",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "daily(Data)",
+                  "displayName": "Day",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(faturamento_total)",
+                  "displayName": "faturamento_total",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "corridas_linha",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "faturamento_diario",
+                  "fields": [
+                    {
+                      "name": "daily(Data)",
+                      "expression": "DATE_TRUNC(\"DAY\", `Data`)"
+                    },
+                    {
+                      "name": "measure(total_corridas)",
+                      "expression": "MEASURE(`total_corridas`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Evolução de Corridas",
+                "showTitle": true
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "daily(Data)",
+                  "displayName": "Day",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(total_corridas)",
+                  "displayName": "total_corridas",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 4,
+            "width": 6,
+            "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "distancia_media_linha",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "faturamento_diario",
+                  "fields": [
+                    {
+                      "name": "daily(Data)",
+                      "expression": "DATE_TRUNC(\"DAY\", `Data`)"
+                    },
+                    {
+                      "name": "measure(distancia_media)",
+                      "expression": "MEASURE(`distancia_media`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Distância Média por Corrida",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "daily(Data)",
+                  "displayName": "Day",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(distancia_media)",
+                  "displayName": "distancia_media",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 12,
+            "height": 8
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
